@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Logout | IP Tracker</title>
+  <link rel="stylesheet" href="logout.css">
+</head>
+<body>
+  <div class="logout-container">
+    <h1>You’ve been logged out</h1>
+    <p>Thank you for using IP Address Tracker.</p>
+    <button id="login-again">Login Again</button>
+  </div>
+
+  <script>
+    // Clear login data on page load
+    localStorage.removeItem('loggedIn');
+
+    // Redirect to login page when button is clicked
+    document.getElementById('login-again').addEventListener('click', () => {
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
