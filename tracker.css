@@ -134,6 +134,109 @@ button[type="submit"]:hover {
   border-top: 2px solid #00b4d8;
 }
 
+
+
+
+
+/* History section */
+.history-section {
+  max-width: 90%;
+  margin: 0 auto 1.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  padding: 1rem 1.2rem 1.3rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.history-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.7rem;
+  color: #a8dadc;
+  text-align: left;
+}
+
+.history-empty {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #b0bec5;
+  margin: 0.5rem 0 0.8rem;
+}
+
+/* History table */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.history-table thead {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.history-table th,
+.history-table td {
+  padding: 0.6rem 0.7rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.history-table th {
+  font-weight: 600;
+  color: #a8dadc;
+}
+
+.history-table tbody tr {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.history-table tbody tr:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Clear history button */
+.clear-history-btn {
+  margin-top: 0.6rem;
+  margin-left: auto;
+  display: block;
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #00b4d8;
+  background: transparent;
+  color: #00b4d8;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.1s;
+}
+
+.clear-history-btn:hover {
+  background: #00b4d8;
+  color: #fff;
+  transform: scale(1.02);
+}
+
+/* Give the map a little space after history */
+#map {
+  height: 500px;
+  width: 100%;
+  z-index: 0;
+  border-top: 2px solid #00b4d8;
+  margin-top: 0.5rem;
+}
+
+
+
+
+
+
+
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .info-box {
