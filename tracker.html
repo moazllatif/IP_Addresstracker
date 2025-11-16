@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IP Address Tracker</title>
 
-  <!-- IMPORTANT: CSS must be in same folder as this HTML -->
+  <!-- Tracker CSS -->
   <link rel="stylesheet" href="tracker.css" />
 
   <!-- Leaflet CSS -->
@@ -13,97 +13,109 @@
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   />
+
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="app-shell">
-    <header class="top-bar">
-      <div class="top-bar__left">
-        <h1 class="app-title">IP Address Tracker</h1>
+  <header class="topbar">
+    <div class="topbar-left">
+      <h1 class="brand">IP Address Tracker</h1>
+      <div class="subtitle">Search an IP or domain — see location, weather, history & favorites</div>
+    </div>
+
+    <div class="topbar-right">
+      <div class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+        <span id="theme-icon">🌙</span>
       </div>
-      <div class="top-bar__right">
-        <button id="logout-btn" class="logout-btn">Logout</button>
+      <button id="logout-btn" class="logout-btn">Logout</button>
+    </div>
+  </header>
+
+  <main class="main-grid">
+    <section class="search-section">
+      <form id="search-form" class="search-form" autocomplete="off">
+        <input type="text" id="ip-input" placeholder="Search for any IP address or domain" aria-label="IP or domain"/>
+        <button type="submit" id="search-btn" aria-label="Search">→</button>
+      </form>
+
+      <section class="info-box" id="info">
+        <div class="info-left">
+          <div class="ip-row">
+            <img id="flag" src="" alt="" class="country-flag" />
+            <div>
+              <strong>IP Address</strong>
+              <p id="ip">—</p>
+            </div>
+            <!-- FAVORITES STAR -->
+            <div id="favorite-star" class="favorite-star" title="Add to favorites">☆</div>
+          </div>
+
+          <div class="info-cards">
+            <div class="card">
+              <strong>Location</strong>
+              <p id="location">—</p>
+            </div>
+            <div class="card">
+              <strong>Timezone</strong>
+              <p id="timezone">—</p>
+            </div>
+            <div class="card">
+              <strong>ISP</strong>
+              <p id="isp">—</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="weather-panel" id="weather-panel" aria-live="polite">
+          <div id="weather-skel" class="weather-skel">Loading weather…</div>
+          <div id="weather" class="weather" style="display:none;">
+            <div class="weather-main">
+              <img id="weather-icon" src="" alt="" />
+              <div class="temp" id="temp">--°C</div>
+            </div>
+            <div class="weather-desc">
+              <div id="weather-desc">—</div>
+              <div id="wind">Wind: —</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="controls-row">
+        <button id="center-btn" title="Center on marker">Center</button>
+        <button id="replay-btn" title="Replay history">Replay</button>
+        <div class="history-toggle" id="history-toggle">History ▸</div>
+        <!-- FAVORITES PANEL TOGGLE -->
+        <div class="history-toggle" id="favorites-toggle">Favorites ▸</div>
       </div>
-    </header>
+    </section>
 
-    <main class="main-content">
-      <!-- Search bar -->
-      <section class="search-section">
-        <form id="search-form" class="search-form">
-          <input
-            type="text"
-            id="ip-input"
-            placeholder="Search for any IP address or domain"
-          />
-          <button type="submit" class="search-btn">→</button>
-        </form>
-      </section>
+    <section class="map-section">
+      <div id="map"></div>
+    </section>
 
-      <!-- Inline messages -->
-      <div id="message" class="message message--hidden"></div>
+    <aside class="history-panel" id="history-panel">
+      <div class="history-header">
+        <h3>Search History</h3>
+        <button id="clear-history" title="Clear history">Clear</button>
+      </div>
+      <ul id="history-list" class="history-list"></ul>
+    </aside>
 
-      <!-- Info card -->
-      <section class="info-card" id="info">
-        <div class="info-row">
-          <div class="info-group">
-            <span class="info-label">IP Address</span>
-            <p class="info-value" id="ip">-</p>
-          </div>
-          <div class="info-group">
-            <span class="info-label">Location</span>
-            <p class="info-value" id="location">-</p>
-          </div>
-          <div class="info-group">
-            <span class="info-label">Timezone</span>
-            <p class="info-value" id="timezone">-</p>
-          </div>
-          <div class="info-group">
-            <span class="info-label">ISP</span>
-            <p class="info-value" id="isp">-</p>
-          </div>
-        </div>
-        <button id="favorite-current-btn" class="favorite-current-btn">
-          ★ Add to favorites
-        </button>
-      </section>
+  <!-- FAVORITES PANEL -->
+  <aside class="history-panel" id="favorites-panel" style="display:none;">
+    <div class="history-header">
+      <h3>Favorites</h3>
+    </div>
+    <ul id="favorites-list" class="history-list"></ul>
+  </aside>
 
-      <!-- Map card -->
-      <section class="map-card">
-        <div id="map"></div>
-      </section>
-
-      <!-- History card -->
-      <section class="history-section">
-        <div class="history-header">
-          <h2>Search History</h2>
-          <button id="clear-history-btn" class="clear-history-btn">
-            Clear history
-          </button>
-        </div>
-
-        <div class="history-empty" id="history-empty">No IPs tracked yet.</div>
-
-        <div class="history-table-wrapper">
-          <table class="history-table" id="history-table">
-            <thead>
-              <tr>
-                <th>IP / Domain</th>
-                <th>Location</th>
-                <th>Timezone</th>
-                <th>ISP</th>
-                <th>Time</th>
-                <th>Fav</th>
-              </tr>
-            </thead>
-            <tbody id="history-body"></tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-  </div>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <!-- Your existing JS (the one with history + favorites) -->
+
+  <!-- Main JS -->
   <script src="tracker.js"></script>
 </body>
 </html>
