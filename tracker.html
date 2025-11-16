@@ -5,71 +5,105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IP Address Tracker</title>
 
-  <!-- Link to CSS -->
+  <!-- IMPORTANT: CSS must be in same folder as this HTML -->
   <link rel="stylesheet" href="tracker.css" />
 
-  <!-- Leaflet CSS for map -->
+  <!-- Leaflet CSS -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   />
 </head>
 <body>
-  <header>
-    <h1>IP Address Tracker</h1>
-    <form id="search-form">
-      <input type="text" id="ip-input" placeholder="Search for any IP address or domain" />
-      <button type="submit">→</button>
-    </form>
-    <button id="logout-btn" class="logout-btn">Logout</button>
-  </header>
+  <div class="app-shell">
+    <header class="top-bar">
+      <div class="top-bar__left">
+        <h1 class="app-title">IP Address Tracker</h1>
+      </div>
+      <div class="top-bar__right">
+        <button id="logout-btn" class="logout-btn">Logout</button>
+      </div>
+    </header>
 
-  <section class="info-box" id="info">
-    <div><strong>IP Address</strong><p id="ip">-</p></div>
-    <div><strong>Location</strong><p id="location">-</p></div>
-    <div><strong>Timezone</strong><p id="timezone">-</p></div>
-    <div><strong>ISP</strong><p id="isp">-</p></div>
-  </section>
+    <main class="main-content">
+      <!-- Search bar -->
+      <section class="search-section">
+        <form id="search-form" class="search-form">
+          <input
+            type="text"
+            id="ip-input"
+            placeholder="Search for any IP address or domain"
+          />
+          <button type="submit" class="search-btn">→</button>
+        </form>
+      </section>
 
-  <div id="map"></div>
+      <!-- Inline messages -->
+      <div id="message" class="message message--hidden"></div>
+
+      <!-- Info card -->
+      <section class="info-card" id="info">
+        <div class="info-row">
+          <div class="info-group">
+            <span class="info-label">IP Address</span>
+            <p class="info-value" id="ip">-</p>
+          </div>
+          <div class="info-group">
+            <span class="info-label">Location</span>
+            <p class="info-value" id="location">-</p>
+          </div>
+          <div class="info-group">
+            <span class="info-label">Timezone</span>
+            <p class="info-value" id="timezone">-</p>
+          </div>
+          <div class="info-group">
+            <span class="info-label">ISP</span>
+            <p class="info-value" id="isp">-</p>
+          </div>
+        </div>
+        <button id="favorite-current-btn" class="favorite-current-btn">
+          ★ Add to favorites
+        </button>
+      </section>
+
+      <!-- Map card -->
+      <section class="map-card">
+        <div id="map"></div>
+      </section>
+
+      <!-- History card -->
+      <section class="history-section">
+        <div class="history-header">
+          <h2>Search History</h2>
+          <button id="clear-history-btn" class="clear-history-btn">
+            Clear history
+          </button>
+        </div>
+
+        <div class="history-empty" id="history-empty">No IPs tracked yet.</div>
+
+        <div class="history-table-wrapper">
+          <table class="history-table" id="history-table">
+            <thead>
+              <tr>
+                <th>IP / Domain</th>
+                <th>Location</th>
+                <th>Timezone</th>
+                <th>ISP</th>
+                <th>Time</th>
+                <th>Fav</th>
+              </tr>
+            </thead>
+            <tbody id="history-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-
-    <section class="info-box" id="info">
-    <div><strong>IP Address</strong><p id="ip">-</p></div>
-    <div><strong>Location</strong><p id="location">-</p></div>
-    <div><strong>Timezone</strong><p id="timezone">-</p></div>
-    <div><strong>ISP</strong><p id="isp">-</p></div>
-  </section>
-
-  <!-- 🆕 History section -->
-  <section class="history-section">
-    <h2>Search History</h2>
-    <div class="history-empty" id="history-empty">No IPs tracked yet.</div>
-
-    <table class="history-table" id="history-table">
-      <thead>
-        <tr>
-          <th>IP / Domain</th>
-          <th>Location</th>
-          <th>Timezone</th>
-          <th>ISP</th>
-          <th>Time</th>
-        </tr>
-      </thead>
-      <tbody id="history-body"></tbody>
-    </table>
-
-    <button id="clear-history-btn" class="clear-history-btn">
-      Clear history
-    </button>
-  </section>
-
-  <div id="map"></div>
-
-  <!-- Main JS -->
+  <!-- Your existing JS (the one with history + favorites) -->
   <script src="tracker.js"></script>
 </body>
 </html>
