@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   }
 
-  const IP_API_KEY = 'at_5sdJ7ABtaFVcX9n0Mk8hkva46iqiZ';
+  const IP_API_KEY = 'at_gAHU1anZtCFmfDZNTh456qQ3cBa22';
   const IP_API_URL = 'https://geo.ipify.org/api/v2/country,city';
   const WEATHER_API_KEY = 'ff2a59cfddbd50729a132539ee246f42';
   const WEATHER_BASE = 'https://api.openweathermap.org/data/2.5/weather';
