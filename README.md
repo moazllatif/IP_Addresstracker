@@ -1,140 +1,85 @@
-📍 IP Address Tracker
-<p align="center"> <img src="/mnt/data/e4059d8f-d40c-45fc-ab1b-9efab7a1cae1.png" width="850"> </p>
+# 📍 IP Address Tracker
 
-A modern, full-featured IP Address Tracking Platform with:
+A modern, full-featured IP Tracking Dashboard with authentication, IP lookup, weather integration, map visualization, search history, favorites, and custom IP naming — all in a beautifully animated UI.
 
-🔐 User Authentication (Login + Register)
+---
 
-📡 IP Geolocation Lookup
+## 🏆 Features
 
-🌦 Weather Integration
+### 🔐 Authentication
+- Register new users  
+- Login system using LocalStorage  
+- Protected tracker page  
+- Logout that clears session  
 
-⭐ Favorites System
+### 📡 IP Geolocation Lookup
+- Powered by **ipapi.co (free, no key needed)**  
+- Displays:
+  - IP Address  
+  - Country + Flag  
+  - Region  
+  - City  
+  - Timezone  
+  - ISP  
+  - Lat/Lon coordinates  
 
-🕘 Search History
+### 🌦 Weather Integration
+- Powered by **OpenWeatherMap**  
+- Shows:
+  - Temperature  
+  - Weather Icon  
+  - Description  
+  - Wind Speed  
 
-✎ Custom IP Naming
+### ⭐ Favorites System
+- Star any IP  
+- Saves full IP metadata  
+- Persistent across sessions  
+- Click to reload favorite IP  
 
-🗺 Live Map (Leaflet.js)
+### 🕘 Search History
+- Saves last 50 searches  
+- Clickable reload  
+- Clear history button  
 
-📱 Fully Responsive UI
+### ✎ Rename IP Addresses
+Assign custom names to any IP:
+```
+85.238.76.171 → VPN Server  
+1.1.1.1 → Cloudflare DNS
+```
+Names appear in:
+- IP panel  
+- Favorites  
+- History  
+- Replay mode  
 
-🌓 Light & Dark Themes
+### 🗺 Live Map
+- Leaflet.js map  
+- Smooth fly animation  
+- Pulsing marker  
+- Auto-center  
 
-❤️ Heartbeat Tracking for devices
+### 🌓 Dark/Light Theme
+- Switch themes with toggle  
+- Saves preference  
 
-🚪 Logout System
-
-This project provides a polished frontend IP tracking dashboard with animated UI, smooth UX, and persistent data storage.
-
-🏆 Features
-🔑 Authentication System
-
-User registration
-
-Login with LocalStorage auth
-
-Protected tracker page
-
-Logout screen clearing session
-
-📡 IP Geolocation Lookup
-
-Powered by ipapi.co (free, no key)
-Fetches:
-✔ IP
-✔ ISP
-✔ City
-✔ Region
-✔ Country
-✔ Timezone
-✔ Latitude / Longitude
-
-🌦 Real-Time Weather
-
-Powered by OpenWeatherMap API
-
-Displays:
-✔ Temperature
-✔ Weather icon
-✔ Wind speed
-✔ Weather description
-
-⭐ Favorites
-
-Save IP addresses with one click
-
-Remove favorites
-
-Persistent across sessions
-
-Fast switching between saved IPs
-
-🕘 Search History
-
-Stores last 50 searches
-
-Click to load previous results
-
-Clear history with confirmation
-
-✎ Rename Any IP
-
-You can assign labels:
-
-85.238.76.171 → "VPN Server"
-1.1.1.1       → "Cloudflare DNS"
-
-
-Labels appear in:
-✔ IP Panel
-✔ Favorites
-✔ Search History
-✔ Replay Mode
-
-🗺 Live Map
-
-Leaflet.js interactive map
-
-Smooth fly animations
-
-Pulsing marker
-
-Auto-center button
-
-🌓 Theme Support
-
-Light mode
-
-Dark mode
-
-Saves preference
-
-❤️ Heartbeat System
-
-Sends device data every 30 seconds:
-
+### ❤️ Heartbeat System
+Every 30 seconds:
+```
 POST http://localhost:5000/api/heartbeat
+```
+Sends:
+- deviceId  
+- deviceName  
+- IP  
+- deviceType  
 
+---
 
-Includes:
+## 🧱 Project Structure
 
-deviceId
-
-deviceName
-
-IP
-
-deviceType
-
-📸 Screenshots
-🔍 Search, Weather & Map
-<p align="center"> <img src="/mnt/data/e4059d8f-d40c-45fc-ab1b-9efab7a1cae1.png" width="850"> </p>
-🌍 Default View (Waiting for IP Data)
-<p align="center"> <img src="/mnt/data/8155f0a5-0011-41a7-af83-f0ef5e848739.png" width="850"> </p>
-🧩 Layout Testing / Early Build
-<p align="center"> <img src="/mnt/data/02823dc6-0d01-4395-96f2-041788fbe29d.png" width="850"> </p>
-🧱 Project Structure
+```
 /login
    ├── login.html
    ├── login.css
@@ -153,63 +98,89 @@ deviceType
 /logout
    ├── logout.html
    └── logout.css
+```
 
-⚙️ Technologies Used
-Frontend
+---
 
-HTML5
+## ⚙️ Tech Stack
 
-CSS3
+**Frontend**
+- HTML5  
+- CSS3 (Glassmorphism + animations)  
+- JavaScript (ES6)  
+- Leaflet.js (Map)  
+- ipapi.co API (IP lookup)  
+- OpenWeather API (weather)  
+- Google Fonts (Inter)
 
-JavaScript (ES6+)
+**LocalStorage**
+- Users  
+- Login sessions  
+- Search history  
+- Favorites  
+- IP name assignments  
+- Theme mode  
 
-Leaflet.js
+**Optional Backend**
+- Heartbeat endpoint (Node.js / Express compatible)
 
-OpenWeatherMap API
+---
 
-ipapi.co API
+## 🚀 Setup Instructions
 
-Google Fonts — Inter
-
-LocalStorage
-
-Used for:
-
-Login sessions
-
-Registered users
-
-Search history
-
-Favorites
-
-Renamed IPs
-
-Theme selection
-
-Backend (optional)
-
-Heartbeat endpoint expects:
-
-POST /api/heartbeat
-
-🚀 Setup Instructions
-1. Clone the repo
+### 1️⃣ Clone the project
+```bash
 git clone <your-repo-url>
+```
 
-2. Open the project
+### 2️⃣ Open the Login Page
+You can use a local server (recommended) or open:
 
-You can run with Live Server or simply open:
-
+```
 /login/login.html
+```
 
-3. Create an account → login → go to tracker page
-4. Start searching IPs
+### 3️⃣ Create an account → Login
 
-Try:
+### 4️⃣ Use the Tracker
+Try searching:
 
+```
 1.1.1.1
 8.8.8.8
 85.238.76.171
+```
 
-5. Save favorites, rename IPs, replay history, switch theme, etc.
+### 5️⃣ Use all features
+- Rename IP  
+- Add to favorites  
+- Clear history  
+- Switch theme  
+- Replay history  
+- Logout  
+
+---
+
+## 🎯 Environment Variables (Optional Backend)
+
+```
+WEATHER_API_KEY=your_openweather_key
+BACKEND_URL=http://localhost:5000
+```
+
+---
+
+## 🔮 Future Improvements
+
+- Cloud sync for favorites/history  
+- User accounts on backend  
+- UI transitions with GSAP  
+- Export / import saved IPs  
+- Mobile PWA version  
+
+---
+
+## ❤️ Credits
+
+A fully custom, polished UI and feature-rich dashboard created by **YOU**, with real APIs, animations, and clean UX.
+
