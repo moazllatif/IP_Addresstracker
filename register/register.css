@@ -1,0 +1,121 @@
+/* Reset & base styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #1b2b34, #2c5166);
+  overflow: hidden;
+  position: relative;
+  color: #e0e0e0;
+}
+
+/* Subtle animated grid for map vibe */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: moveGrid 20s linear infinite;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+@keyframes moveGrid {
+  from { background-position: 0 0; }
+  to { background-position: 100px 100px; }
+}
+
+/* Overlay blur to mimic glass/map effect */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.6));
+  z-index: 1;
+}
+
+/* Form container */
+.register-container, .login-container {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  width: 320px;
+  text-align: center;
+}
+
+/* Title */
+h1, h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: whitesmoke;
+  letter-spacing: 1px;
+}
+
+/* Input fields */
+input {
+  width: 100%;
+  padding: 0.9rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: background 0.3s;
+}
+
+input::placeholder {
+  color: #cfd8dc;
+}
+
+input:focus {
+  background: rgba(255,255,255,0.25);
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background: #00b4d8;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background: #0096c7;
+  transform: scale(1.03);
+}
+
+/* Note / link text */
+.note, p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #b0bec5;
+}
+
+.note strong, p a {
+  color: #00b4d8;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}

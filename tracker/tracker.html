@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IP Address Tracker</title>
+
+  <!-- Tracker CSS -->
+  <link rel="stylesheet" href="tracker.css" />
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <h1 class="brand">IP Address Tracker</h1>
+      <div class="subtitle">Search an IP or domain — see location, weather, history & favorites</div>
+    </div>
+
+    <div class="topbar-right">
+      <div class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+        <span id="theme-icon">🌙</span>
+      </div>
+      <button id="logout-btn" class="logout-btn">Logout</button>
+    </div>
+  </header>
+
+  <main class="main-grid">
+    <section class="search-section">
+      <form id="search-form" class="search-form" autocomplete="off">
+        <input type="text" id="ip-input" placeholder="Search for any IP address or domain" aria-label="IP or domain"/>
+        <button type="submit" id="search-btn" aria-label="Search">→</button>
+      </form>
+
+      <section class="info-box" id="info">
+        <div class="info-left">
+          <div class="ip-row">
+            <img id="flag" src="" alt="" class="country-flag" />
+            <div>
+              <strong>IP Address</strong>
+              <p id="ip">—</p>
+            </div>
+            <!-- FAVORITES STAR -->
+            <div id="favorite-star" class="favorite-star" title="Add to favorites">☆</div>
+          </div>
+
+          <div class="info-cards">
+            <div class="card">
+              <strong>Location</strong>
+              <p id="location">—</p>
+            </div>
+            <div class="card">
+              <strong>Timezone</strong>
+              <p id="timezone">—</p>
+            </div>
+            <div class="card">
+              <strong>ISP</strong>
+              <p id="isp">—</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="weather-panel" id="weather-panel" aria-live="polite">
+          <div id="weather-skel" class="weather-skel">Loading weather…</div>
+          <div id="weather" class="weather" style="display:none;">
+            <div class="weather-main">
+              <img id="weather-icon" src="" alt="" />
+              <div class="temp" id="temp">--°C</div>
+            </div>
+            <div class="weather-desc">
+              <div id="weather-desc">—</div>
+              <div id="wind">Wind: —</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="controls-row">
+        <button id="center-btn" title="Center on marker">Center</button>
+        <button id="replay-btn" title="Replay history">Replay</button>
+        <div class="history-toggle" id="history-toggle">History ▸</div>
+        <!-- FAVORITES PANEL TOGGLE -->
+        <div class="history-toggle" id="favorites-toggle">Favorites ▸</div>
+      </div>
+    </section>
+
+    <section class="map-section">
+      <div id="map"></div>
+    </section>
+
+    <aside class="history-panel" id="history-panel">
+      <div class="history-header">
+        <h3>Search History</h3>
+        <button id="clear-history" title="Clear history">Clear</button>
+      </div>
+      <ul id="history-list" class="history-list"></ul>
+    </aside>
+
+  <!-- FAVORITES PANEL -->
+  <aside class="history-panel" id="favorites-panel" style="display:none;">
+    <div class="history-header">
+      <h3>Favorites</h3>
+    </div>
+    <ul id="favorites-list" class="history-list"></ul>
+  </aside>
+
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Main JS -->
+  <script src="tracker.js"></script>
+</body>
+</html>
