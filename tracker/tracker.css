@@ -1,5 +1,29 @@
 /* tracker.css - modern, aesthetic, animated */
 
+
+
+.ip-rename-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rename-icon {
+    cursor: pointer;
+    font-size: 18px;
+    opacity: 0.75;
+    transition: 0.15s;
+    margin-left: 6px;
+}
+
+.rename-icon:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+
+
+
 /* variables for theme */
 :root{
   --bg-1: linear-gradient(180deg, #0f1720, #132029);

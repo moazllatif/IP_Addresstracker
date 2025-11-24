@@ -58,8 +58,63 @@ document.addEventListener('DOMContentLoaded', () => {
   const replayBtn = document.getElementById('replay-btn');
   const logoutBtn = document.getElementById('logout-btn');
 
+  const renameIpBtn = document.getElementById("rename-ip-btn");
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
+
+
+
+  // ---------- RENAME BUTTON POPUP ----------
+renameIpBtn?.addEventListener("click", () => {
+  const rawIP = extractRawIP(ipDisplay.textContent);
+  if (!rawIP || rawIP === "Loading…" || rawIP === "—") return;
+
+  const currentName = getIPName(rawIP);
+
+  const popup = document.createElement("div");
+  popup.style.position = "fixed";
+  popup.style.top = "50%";
+  popup.style.left = "50%";
+  popup.style.transform = "translate(-50%, -50%)";
+  popup.style.background = "#132029";
+  popup.style.padding = "20px 25px";
+  popup.style.borderRadius = "12px";
+  popup.style.color = "white";
+  popup.style.zIndex = 99999;
+  popup.style.textAlign = "center";
+
+  popup.innerHTML = `
+      <div style="margin-bottom:12px;font-weight:600;">Rename IP Address</div>
+      <input id="rename-ip-input"
+             value="${currentName}"
+             style="padding:8px;width:220px;border-radius:6px;border:none;margin-bottom:12px;background:#0d1a22;color:white;">
+      <div style="display:flex;gap:12px;justify-content:center;">
+        <button id="rename-save" style="padding:6px 14px;background:#00b4d8;border:none;border-radius:6px;color:white;">Save</button>
+        <button id="rename-cancel" style="padding:6px 14px;background:#e74c3c;border:none;border-radius:6px;color:white;">Cancel</button>
+      </div>
+  `;
+
+  document.body.appendChild(popup);
+
+  document.getElementById("rename-save").addEventListener("click", () => {
+    const newName = document.getElementById("rename-ip-input").value.trim();
+    const names = loadIPNames();
+    names[rawIP] = newName;
+    saveIPNames(names);
+    ipDisplay.textContent = formatIP(rawIP);
+    renderHistory?.();
+    renderFavorites?.();
+    popup.remove();
+    showMessage("IP renamed!");
+  });
+
+  document.getElementById("rename-cancel").addEventListener("click", () => popup.remove());
+});
+
+
+
+
+
 
   // ---------- AUTH CHECK ----------
   const loggedUser = localStorage.getItem('loggedUser');
@@ -113,6 +168,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showError(msg) { showMessage(msg, 'error'); }
+
+
+  // ---------- RENAME IP SYSTEM ----------
+  function loadIPNames() {
+    return JSON.parse(localStorage.getItem("ipNames") || "{}");
+  }
+
+  function saveIPNames(obj) {
+    localStorage.setItem("ipNames", JSON.stringify(obj));
+  }
+
+  function getIPName(ip) {
+    const names = loadIPNames();
+    return names[ip] || "";
+  }
+
+  function formatIP(ip) {
+    const name = getIPName(ip);
+    return name ? `${ip} (${name})` : ip;
+  }
+
+  function extractRawIP(displayText) {
+    if (!displayText) return "";
+    return displayText.split(" ")[0]; 
+  }
+
+
 
   // ---------- HISTORY ----------
   function loadHistory() { return JSON.parse(localStorage.getItem('ipHistory') || '[]'); }
@@ -226,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const { ip, isp, location } = data;
       const { city, region, country, timezone, lat, lng } = location || {};
 
-      ipDisplay.textContent = ip || '-';
+      ipDisplay.textContent = formatIP(ip || '-');
       locationDisplay.textContent = `${city||''}${city&&region?', ':''}${region||''}${(city||region)&&country?', ':''}${country||''}`;
       timezoneDisplay.textContent = timezone ? `UTC ${timezone}` : '-';
       ispDisplay.textContent = isp || '-';
@@ -471,3 +553,33 @@ document.addEventListener('DOMContentLoaded', () => {
   sendHeartbeat(); // initial heartbeat
   setInterval(sendHeartbeat, 30000); // every 30s
 });
+
+
+
+
+
+
+
+// ---------- RENAME IP SYSTEM ----------
+function loadIPNames() {
+  return JSON.parse(localStorage.getItem("ipNames") || "{}");
+}
+
+function saveIPNames(obj) {
+  localStorage.setItem("ipNames", JSON.stringify(obj));
+}
+
+function getIPName(ip) {
+  const names = loadIPNames();
+  return names[ip] || "";
+}
+
+function formatIP(ip) {
+  const name = getIPName(ip);
+  return name ? `${ip} (${name})` : ip;
+}
+
+function extractRawIP(displayText) {
+  if (!displayText) return "";
+  return displayText.split(" ")[0]; 
+}

@@ -43,10 +43,16 @@
         <div class="info-left">
           <div class="ip-row">
             <img id="flag" src="" alt="" class="country-flag" />
-            <div>
-              <strong>IP Address</strong>
-              <p id="ip">—</p>
+
+            <!-- IP + Rename Button -->
+            <div class="ip-rename-container">
+              <div>
+                <strong>IP Address</strong>
+                <p id="ip">—</p>
+              </div>
+              <span id="rename-ip-btn" class="rename-icon" title="Rename this IP">✏️</span>
             </div>
+
             <!-- FAVORITES STAR -->
             <div id="favorite-star" class="favorite-star" title="Add to favorites">☆</div>
           </div>
@@ -85,7 +91,9 @@
       <div class="controls-row">
         <button id="center-btn" title="Center on marker">Center</button>
         <button id="replay-btn" title="Replay history">Replay</button>
+
         <div class="history-toggle" id="history-toggle">History ▸</div>
+
         <!-- FAVORITES PANEL TOGGLE -->
         <div class="history-toggle" id="favorites-toggle">Favorites ▸</div>
       </div>
@@ -95,6 +103,7 @@
       <div id="map"></div>
     </section>
 
+    <!-- HISTORY PANEL -->
     <aside class="history-panel" id="history-panel">
       <div class="history-header">
         <h3>Search History</h3>
@@ -103,14 +112,15 @@
       <ul id="history-list" class="history-list"></ul>
     </aside>
 
-  <!-- FAVORITES PANEL -->
-  <aside class="history-panel" id="favorites-panel" style="display:none;">
-    <div class="history-header">
-      <h3>Favorites</h3>
-    </div>
-    <ul id="favorites-list" class="history-list"></ul>
-  </aside>
+    <!-- FAVORITES PANEL -->
+    <aside class="history-panel" id="favorites-panel" style="display:none;">
+      <div class="history-header">
+        <h3>Favorites</h3>
+      </div>
+      <ul id="favorites-list" class="history-list"></ul>
+    </aside>
 
+  </main>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
